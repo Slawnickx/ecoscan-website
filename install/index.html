@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>EcoScan — iOS Installation</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-primary: #2E7D32;
+      --green-light: #4CAF50;
+      --green-dark: #1B5E20;
+      --green-glow: rgba(76, 175, 80, 0.3);
+      --accent: #66BB6A;
+      --bg: #0a0f0a;
+      --bg-card: #141e14;
+      --text: #e8f5e9;
+      --text-muted: #a5d6a7;
+      --text-dim: #6b9b6e;
+      --border: rgba(76, 175, 80, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(76,175,80,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(102,187,106,0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(46,125,50,0.06) 0%, transparent 50%);
+      z-index: -1;
+      animation: bgPulse 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgPulse {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    .container {
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    /* Back link */
+    .back-link {
+      align-self: flex-start;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--green-light); }
+
+    /* App icon */
+    .app-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #1B5E20, #4CAF50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 8px 32px rgba(76,175,80,0.3);
+      animation: iconFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* App info */
+    .app-info {
+      text-align: center;
+    }
+    .app-info h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--green-light), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.3rem;
+    }
+    .app-info .version {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    /* Install button */
+    .install-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(76,175,80,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .install-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      animation: shimmer 3s infinite;
+    }
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    .install-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(76,175,80,0.5);
+    }
+    .install-btn:active {
+      transform: scale(0.97);
+    }
+
+    /* Alternative download */
+    .alt-download {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+    .alt-download a {
+      color: var(--green-light);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .alt-download a:hover {
+      text-decoration: underline;
+    }
+
+    /* Info cards */
+    .info-card {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.2rem;
+      backdrop-filter: blur(10px);
+    }
+    .info-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Steps */
+    .steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .step-num {
+      min-width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-dark), var(--green-primary));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Requirements */
+    .req-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .req-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .req-list li::before {
+      content: '✓';
+      color: var(--green-light);
+      font-weight: 700;
+    }
+
+    /* Status badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(76,175,80,0.1);
+      border: 1px solid rgba(76,175,80,0.3);
+      color: var(--green-light);
+    }
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green-light);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* Warning */
+    .warning-box {
+      width: 100%;
+      background: rgba(255,152,0,0.08);
+      border: 1px solid rgba(255,152,0,0.25);
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+    }
+    .warning-box .icon { font-size: 1.3rem; flex-shrink: 0; }
+    .warning-box p {
+      font-size: 0.82rem;
+      color: #ffcc80;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+    }
+    .footer a { color: var(--green-light); text-decoration: none; }
+
+    /* Non-iOS message */
+    .not-ios {
+      display: none;
+      width: 100%;
+      background: rgba(244,67,54,0.08);
+      border: 1px solid rgba(244,67,54,0.25);
+      border-radius: 12px;
+      padding: 1.2rem;
+      text-align: center;
+    }
+    .not-ios .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .not-ios h3 { color: #ef9a9a; font-size: 1rem; margin-bottom: 0.4rem; }
+    .not-ios p { color: #ef9a9a; font-size: 0.85rem; opacity: 0.8; }
+
+    /* Success animation */
+    .install-started {
+      display: none;
+      width: 100%;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .install-started .checkmark {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 1rem;
+      animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes scaleIn {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+    .install-started h3 {
+      color: var(--green-light);
+      margin-bottom: 0.4rem;
+    }
+    .install-started p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 500px) {
+      body { padding: 1.5rem 0.8rem; }
+      .app-icon { width: 80px; height: 80px; font-size: 2.5rem; }
+      .app-info h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Back -->
+    <a href="../" class="back-link">← Zurück zu EcoScan</a>
+
+    <!-- App icon -->
+    <div class="app-icon">🌿</div>
+
+    <!-- App info -->
+    <div class="app-info">
+      <h1>EcoScan</h1>
+      <p class="version">Version 1.0.0 • iOS App</p>
+      <div class="status-badge" style="margin-top:0.5rem">
+        <span class="status-dot"></span>
+        Bereit zur Installation
+      </div>
+    </div>
+
+    <!-- Install Button -->
+    <a id="installBtn" 
+       href="itms-services://?action=download-manifest&url=https://slawnickx.github.io/ecoscan-website/install/manifest.plist" 
+       class="install-btn">
+      📲 Auf iPhone installieren
+    </a>
+
+    <!-- Not iOS warning -->
+    <div id="notIos" class="not-ios">
+      <div class="icon">📱</div>
+      <h3>Nur für iOS</h3>
+      <p>Öffne diese Seite auf deinem iPhone in Safari, um die App direkt zu installieren.</p>
+    </div>
+
+    <!-- Install started feedback -->
+    <div id="installStarted" class="install-started">
+      <div class="checkmark">✓</div>
+      <h3>Installation gestartet!</h3>
+      <p>Schau auf deinen Homescreen. Die App wird im Hintergrund geladen.</p>
+    </div>
+
+    <!-- Alternative -->
+    <div class="alt-download">
+      Oder <a href="https://github.com/Slawnickx/ecoscan-website/releases/latest/download/eco_scan.ipa">IPA-Datei direkt herunterladen</a> (für AltStore / Sideloadly)
+    </div>
+
+    <!-- Steps -->
+    <div class="info-card">
+      <h3>📋 So funktioniert's</h3>
+      <ol class="steps">
+        <li>
+          <span class="step-num">1</span>
+          <span>Öffne diese Seite in <strong>Safari</strong> auf deinem iPhone</span>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <span>Tippe auf <strong>„Auf iPhone installieren"</strong></span>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <span>Bestätige den Dialog mit <strong>„Installieren"</strong></span>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <span>Gehe zu <strong>Einstellungen → Allgemein → VPN & Geräteverwaltung</strong> und vertraue dem Entwicklerzertifikat</span>
+        </li>
+        <li>
+          <span class="step-num">5</span>
+          <span>Öffne EcoScan von deinem Homescreen 🎉</span>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Warning -->
+    <div class="warning-box">
+      <span class="icon">⚠️</span>
+      <p><strong>Wichtig:</strong> Die IPA muss mit einem gültigen Enterprise- oder Ad-Hoc-Zertifikat signiert sein. Ohne gültiges Profil wird iOS die Installation ablehnen. Nutze alternativ AltStore oder Sideloadly für selbst-signierte IPAs.</p>
+    </div>
+
+    <!-- Requirements -->
+    <div class="info-card">
+      <h3>📱 Voraussetzungen</h3>
+      <ul class="req-list">
+        <li>iPhone mit iOS 14.0 oder neuer</li>
+        <li>Safari Browser (andere Browser unterstützen itms-services nicht)</li>
+        <li>Internetverbindung zum Herunterladen</li>
+        <li>Gültiges Signierungszertifikat auf der IPA</li>
+      </ul>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>EcoScan © 2024 • <a href="../">Zurück zur Website</a></p>
+    </div>
+  </div>
+
+  <script>
+    // Detect if not iOS
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    
+    const installBtn = document.getElementById('installBtn');
+    const notIos = document.getElementById('notIos');
+    const installStarted = document.getElementById('installStarted');
+
+    if (!isIOS) {
+      notIos.style.display = 'block';
+    }
+
+    // Show feedback after clicking install
+    installBtn.addEventListener('click', function(e) {
+      if (!isIOS) {
+        e.preventDefault();
+        notIos.style.display = 'block';
+        notIos.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      
+      setTimeout(() => {
+        installStarted.style.display = 'block';
+        installStarted.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
