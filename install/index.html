@@ -14,14 +14,17 @@
       --green-primary: #2E7D32;
       --green-light: #4CAF50;
       --green-dark: #1B5E20;
-      --green-glow: rgba(76, 175, 80, 0.3);
       --accent: #66BB6A;
       --bg: #0a0f0a;
       --bg-card: #141e14;
+      --bg-card-alt: #0d180d;
       --text: #e8f5e9;
       --text-muted: #a5d6a7;
       --text-dim: #6b9b6e;
       --border: rgba(76, 175, 80, 0.15);
+      --blue: #42A5F5;
+      --orange: #FFA726;
+      --purple: #AB47BC;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,43 +35,30 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       padding: 2rem 1rem;
       overflow-x: hidden;
     }
 
-    /* Animated background */
     body::before {
       content: '';
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background: 
         radial-gradient(ellipse at 20% 50%, rgba(76,175,80,0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(102,187,106,0.05) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 80%, rgba(46,125,50,0.06) 0%, transparent 50%);
+        radial-gradient(ellipse at 80% 20%, rgba(102,187,106,0.05) 0%, transparent 50%);
       z-index: -1;
-      animation: bgPulse 8s ease-in-out infinite alternate;
-    }
-
-    @keyframes bgPulse {
-      0% { opacity: 0.6; }
-      100% { opacity: 1; }
     }
 
     .container {
-      max-width: 480px;
-      width: 100%;
+      max-width: 540px;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 1.5rem;
     }
 
-    /* Back link */
+    /* Back */
     .back-link {
-      align-self: flex-start;
       color: var(--text-muted);
       text-decoration: none;
       font-size: 0.9rem;
@@ -79,114 +69,95 @@
     }
     .back-link:hover { color: var(--green-light); }
 
-    /* App icon */
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 1rem 0;
+    }
     .app-icon {
-      width: 100px;
-      height: 100px;
-      border-radius: 22px;
+      width: 90px; height: 90px;
+      border-radius: 20px;
       background: linear-gradient(135deg, #1B5E20, #4CAF50);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem;
+      margin: 0 auto 1rem;
       box-shadow: 0 8px 32px rgba(76,175,80,0.3);
       animation: iconFloat 3s ease-in-out infinite;
     }
-
     @keyframes iconFloat {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+      50% { transform: translateY(-5px); }
     }
-
-    /* App info */
-    .app-info {
-      text-align: center;
-    }
-    .app-info h1 {
-      font-size: 1.8rem;
+    .header h1 {
+      font-size: 1.6rem;
       font-weight: 800;
       background: linear-gradient(135deg, var(--green-light), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 0.3rem;
+      background-clip: text;
     }
-    .app-info .version {
-      color: var(--text-dim);
-      font-size: 0.85rem;
+    .header p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
     }
 
-    /* Install button */
-    .install-btn {
+    /* Method tabs */
+    .method-tabs {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      width: 100%;
-      padding: 1rem 2rem;
-      background: linear-gradient(135deg, var(--green-primary), var(--green-light));
-      color: white;
-      font-size: 1.1rem;
-      font-weight: 700;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 0.3rem;
+      border: 1px solid var(--border);
+    }
+    .method-tab {
+      flex: 1;
+      padding: 0.7rem 0.5rem;
       border: none;
-      border-radius: 14px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s;
-      box-shadow: 0 4px 20px rgba(76,175,80,0.4);
-      position: relative;
-      overflow: hidden;
-    }
-    .install-btn::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-      animation: shimmer 3s infinite;
-    }
-    @keyframes shimmer {
-      0% { left: -100%; }
-      100% { left: 100%; }
-    }
-    .install-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(76,175,80,0.5);
-    }
-    .install-btn:active {
-      transform: scale(0.97);
-    }
-
-    /* Alternative download */
-    .alt-download {
-      text-align: center;
+      border-radius: 10px;
+      background: transparent;
       color: var(--text-dim);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      text-align: center;
     }
-    .alt-download a {
-      color: var(--green-light);
-      text-decoration: none;
-      font-weight: 500;
+    .method-tab.active {
+      background: linear-gradient(135deg, var(--green-dark), var(--green-primary));
+      color: white;
+      box-shadow: 0 2px 10px rgba(76,175,80,0.3);
     }
-    .alt-download a:hover {
-      text-decoration: underline;
+    .method-tab:not(.active):hover {
+      color: var(--text-muted);
+      background: rgba(76,175,80,0.05);
     }
 
-    /* Info cards */
-    .info-card {
-      width: 100%;
+    /* Method content */
+    .method-content { display: none; }
+    .method-content.active { display: block; }
+
+    /* Cards */
+    .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 1.2rem;
+      padding: 1.3rem;
       backdrop-filter: blur(10px);
     }
-    .info-card h3 {
-      font-size: 0.95rem;
+    .card h3 {
+      font-size: 1rem;
       font-weight: 700;
       margin-bottom: 0.8rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+    }
+    .card-highlight {
+      border-color: rgba(76,175,80,0.4);
+      background: linear-gradient(135deg, rgba(46,125,50,0.1), var(--bg-card));
     }
 
     /* Steps */
@@ -194,276 +165,483 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 1rem;
     }
-    .steps li {
+    .step {
       display: flex;
       align-items: flex-start;
       gap: 0.8rem;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.5;
     }
     .step-num {
-      min-width: 26px;
-      height: 26px;
+      min-width: 28px; height: 28px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--green-dark), var(--green-primary));
       color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 0.75rem;
       font-weight: 700;
       flex-shrink: 0;
     }
-
-    /* Requirements */
-    .req-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+    .step-content {
+      flex: 1;
     }
-    .req-list li {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.85rem;
+    .step-content strong {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+    .step-content p {
+      font-size: 0.83rem;
       color: var(--text-muted);
-    }
-    .req-list li::before {
-      content: '✓';
-      color: var(--green-light);
-      font-weight: 700;
-    }
-
-    /* Status badge */
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      background: rgba(76,175,80,0.1);
-      border: 1px solid rgba(76,175,80,0.3);
-      color: var(--green-light);
-    }
-    .status-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green-light);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    /* Warning */
-    .warning-box {
-      width: 100%;
-      background: rgba(255,152,0,0.08);
-      border: 1px solid rgba(255,152,0,0.25);
-      border-radius: 12px;
-      padding: 1rem;
-      display: flex;
-      gap: 0.8rem;
-      align-items: flex-start;
-    }
-    .warning-box .icon { font-size: 1.3rem; flex-shrink: 0; }
-    .warning-box p {
-      font-size: 0.82rem;
-      color: #ffcc80;
       line-height: 1.5;
     }
-
-    /* Footer */
-    .footer {
-      margin-top: 2rem;
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 0.75rem;
+    .step-content code {
+      background: var(--bg-card-alt);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      color: var(--accent);
+      border: 1px solid var(--border);
     }
-    .footer a { color: var(--green-light); text-decoration: none; }
 
-    /* Non-iOS message */
-    .not-ios {
-      display: none;
-      width: 100%;
-      background: rgba(244,67,54,0.08);
-      border: 1px solid rgba(244,67,54,0.25);
-      border-radius: 12px;
-      padding: 1.2rem;
-      text-align: center;
-    }
-    .not-ios .icon { font-size: 2rem; margin-bottom: 0.5rem; }
-    .not-ios h3 { color: #ef9a9a; font-size: 1rem; margin-bottom: 0.4rem; }
-    .not-ios p { color: #ef9a9a; font-size: 0.85rem; opacity: 0.8; }
-
-    /* Success animation */
-    .install-started {
-      display: none;
-      width: 100%;
-      text-align: center;
-      padding: 1.5rem;
-    }
-    .install-started .checkmark {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+    /* Buttons */
+    .btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      margin: 0 auto 1rem;
-      animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-family: inherit;
+      position: relative;
+      overflow: hidden;
     }
-    @keyframes scaleIn {
-      0% { transform: scale(0); }
-      100% { transform: scale(1); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+      color: white;
+      box-shadow: 0 4px 20px rgba(76,175,80,0.4);
     }
-    .install-started h3 {
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(76,175,80,0.5);
+    }
+    .btn-secondary {
+      background: var(--bg-card);
       color: var(--green-light);
-      margin-bottom: 0.4rem;
+      border: 1px solid rgba(76,175,80,0.3);
     }
-    .install-started p {
-      color: var(--text-muted);
+    .btn-secondary:hover {
+      background: rgba(76,175,80,0.1);
+      border-color: var(--green-light);
+    }
+    .btn-sm {
+      padding: 0.6rem 1rem;
       font-size: 0.85rem;
+      border-radius: 10px;
     }
+
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-green {
+      background: rgba(76,175,80,0.15);
+      color: var(--green-light);
+      border: 1px solid rgba(76,175,80,0.3);
+    }
+    .badge-blue {
+      background: rgba(66,165,245,0.15);
+      color: var(--blue);
+      border: 1px solid rgba(66,165,245,0.3);
+    }
+    .badge-orange {
+      background: rgba(255,167,38,0.15);
+      color: var(--orange);
+      border: 1px solid rgba(255,167,38,0.3);
+    }
+
+    /* Pros list */
+    .pros {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+    .pros li {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .pros li::before {
+      content: '✓';
+      color: var(--green-light);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    /* Warning / Info boxes */
+    .info-box {
+      width: 100%;
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+    }
+    .info-box .icon { font-size: 1.2rem; flex-shrink: 0; }
+    .info-box p { font-size: 0.82rem; line-height: 1.5; }
+    .info-box.warning {
+      background: rgba(255,152,0,0.08);
+      border: 1px solid rgba(255,152,0,0.2);
+    }
+    .info-box.warning p { color: #ffcc80; }
+    .info-box.tip {
+      background: rgba(66,165,245,0.08);
+      border: 1px solid rgba(66,165,245,0.2);
+    }
+    .info-box.tip p { color: #90caf9; }
+    .info-box.success {
+      background: rgba(76,175,80,0.08);
+      border: 1px solid rgba(76,175,80,0.2);
+    }
+    .info-box.success p { color: var(--text-muted); }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0.5rem 0;
+    }
+
+    /* Copy button */
+    .copy-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .copy-row input {
+      flex: 1;
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-family: monospace;
+      outline: none;
+    }
+    .copy-btn {
+      background: rgba(76,175,80,0.2);
+      border: 1px solid rgba(76,175,80,0.3);
+      color: var(--green-light);
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .copy-btn:hover { background: rgba(76,175,80,0.3); }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      padding: 1rem 0;
+    }
+    .footer a { color: var(--green-light); text-decoration: none; }
 
     @media (max-width: 500px) {
       body { padding: 1.5rem 0.8rem; }
-      .app-icon { width: 80px; height: 80px; font-size: 2.5rem; }
-      .app-info h1 { font-size: 1.5rem; }
+      .app-icon { width: 70px; height: 70px; font-size: 2.2rem; }
+      .header h1 { font-size: 1.4rem; }
+      .method-tab { font-size: 0.72rem; padding: 0.6rem 0.3rem; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Back -->
     <a href="../" class="back-link">← Zurück zu EcoScan</a>
 
-    <!-- App icon -->
-    <div class="app-icon">🌿</div>
+    <!-- Header -->
+    <div class="header">
+      <div class="app-icon">🌿</div>
+      <h1>EcoScan für iOS installieren</h1>
+      <p>Wähle deine bevorzugte Methode — kein Jailbreak nötig</p>
+    </div>
 
-    <!-- App info -->
-    <div class="app-info">
-      <h1>EcoScan</h1>
-      <p class="version">Version 1.0.0 • iOS App</p>
-      <div class="status-badge" style="margin-top:0.5rem">
-        <span class="status-dot"></span>
-        Bereit zur Installation
+    <!-- IPA Download -->
+    <a href="https://github.com/Slawnickx/ecoscan-website/releases/latest/download/eco_scan.ipa" class="btn btn-primary">
+      ⬇️ EcoScan.ipa herunterladen
+    </a>
+
+    <!-- Method Tabs -->
+    <div class="method-tabs">
+      <button class="method-tab active" data-method="esign">📱 ESign</button>
+      <button class="method-tab" data-method="gbox">📦 GBox</button>
+      <button class="method-tab" data-method="altstore">💻 AltStore</button>
+    </div>
+
+    <!-- ====== ESIGN METHOD ====== -->
+    <div id="method-esign" class="method-content active">
+      <div class="card card-highlight">
+        <h3>📱 Methode 1: ESign <span class="badge badge-green">Empfohlen</span></h3>
+        <ul class="pros">
+          <li>Direkt auf dem iPhone — kein PC nötig</li>
+          <li>Kostenlos & einfach</li>
+          <li>App läuft dauerhaft (kein 7-Tage Limit)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>📋 Anleitung</h3>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <strong>ESign installieren</strong>
+              <p>Öffne Safari und gehe zu einer ESign Quelle. Tippe auf "Installieren" und bestätige das Profil unter <code>Einstellungen → Allgemein → VPN & Geräteverwaltung</code></p>
+              <div class="copy-row">
+                <input type="text" value="https://esign.yyyue.xyz" readonly id="esignUrl">
+                <button class="copy-btn" onclick="copyText('esignUrl')">Kopieren</button>
+              </div>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <strong>EcoScan IPA importieren</strong>
+              <p>Lade die IPA oben herunter. Öffne ESign → tippe auf "+" → wähle die heruntergeladene <code>eco_scan.ipa</code> aus deinen Dateien.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <strong>Zertifikat hinzufügen</strong>
+              <p>In ESign → Gehe zu "Zertifikate" Tab → Importiere ein Signierungszertifikat (.p12 + mobileprovision). Du kannst ein kostenloses Zertifikat über die ESign Community finden, oder nutze deine Apple ID.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <strong>Signieren & Installieren</strong>
+              <p>Tippe auf die EcoScan IPA → "Signieren" → Wähle dein Zertifikat → "Installieren". Die App erscheint auf deinem Homescreen!</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">5</span>
+            <div class="step-content">
+              <strong>Zertifikat vertrauen</strong>
+              <p>Gehe zu <code>Einstellungen → Allgemein → VPN & Geräteverwaltung</code> → Tippe auf das Entwickler-Zertifikat → "Vertrauen"</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="info-box tip">
+        <span class="icon">💡</span>
+        <p><strong>Tipp:</strong> Du kannst in ESign auch direkt eine URL als IPA-Quelle hinzufügen. Kopiere einfach den Download-Link oben und füge ihn in ESign ein.</p>
       </div>
     </div>
 
-    <!-- Install Button -->
-    <a id="installBtn" 
-       href="itms-services://?action=download-manifest&url=https://slawnickx.github.io/ecoscan-website/install/manifest.plist" 
-       class="install-btn">
-      📲 Auf iPhone installieren
-    </a>
+    <!-- ====== GBOX METHOD ====== -->
+    <div id="method-gbox" class="method-content">
+      <div class="card card-highlight">
+        <h3>📦 Methode 2: GBox <span class="badge badge-blue">Einfach</span></h3>
+        <ul class="pros">
+          <li>Kein PC nötig</li>
+          <li>Automatisches Signieren mit Apple ID</li>
+          <li>Benutzerfreundliche Oberfläche</li>
+        </ul>
+      </div>
 
-    <!-- Not iOS warning -->
-    <div id="notIos" class="not-ios">
-      <div class="icon">📱</div>
-      <h3>Nur für iOS</h3>
-      <p>Öffne diese Seite auf deinem iPhone in Safari, um die App direkt zu installieren.</p>
+      <div class="card">
+        <h3>📋 Anleitung</h3>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <strong>GBox installieren</strong>
+              <p>Öffne Safari und gehe zur GBox Website. Installiere das Profil und vertraue ihm in den Einstellungen.</p>
+              <div class="copy-row">
+                <input type="text" value="https://gbox.run" readonly id="gboxUrl">
+                <button class="copy-btn" onclick="copyText('gboxUrl')">Kopieren</button>
+              </div>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <strong>Apple ID verbinden</strong>
+              <p>Öffne GBox → Melde dich mit deiner Apple ID an. GBox erstellt automatisch ein 7-Tage Entwicklerzertifikat für dich.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <strong>EcoScan importieren</strong>
+              <p>Lade die IPA herunter → Öffne sie mit GBox (Teilen → GBox) oder importiere sie manuell in der App.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <strong>Installieren</strong>
+              <p>Tippe auf "Install" — GBox signiert und installiert automatisch. Fertig! 🎉</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="info-box warning">
+        <span class="icon">⚠️</span>
+        <p><strong>Hinweis:</strong> Mit kostenloser Apple ID läuft die App 7 Tage. Danach einfach in GBox erneut signieren. Mit Apple Developer Account ($99/Jahr) hält die Signierung 1 Jahr.</p>
+      </div>
     </div>
 
-    <!-- Install started feedback -->
-    <div id="installStarted" class="install-started">
-      <div class="checkmark">✓</div>
-      <h3>Installation gestartet!</h3>
-      <p>Schau auf deinen Homescreen. Die App wird im Hintergrund geladen.</p>
+    <!-- ====== ALTSTORE METHOD ====== -->
+    <div id="method-altstore" class="method-content">
+      <div class="card card-highlight">
+        <h3>💻 Methode 3: AltStore <span class="badge badge-orange">PC nötig</span></h3>
+        <ul class="pros">
+          <li>Offizielles Open-Source Tool</li>
+          <li>Sehr zuverlässig</li>
+          <li>Automatische Erneuerung im WLAN</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>📋 Anleitung</h3>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <strong>AltServer auf PC/Mac installieren</strong>
+              <p>Lade AltServer von <code>altstore.io</code> herunter und installiere es auf deinem Computer.</p>
+              <div class="copy-row">
+                <input type="text" value="https://altstore.io" readonly id="altstoreUrl">
+                <button class="copy-btn" onclick="copyText('altstoreUrl')">Kopieren</button>
+              </div>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <strong>AltStore auf iPhone installieren</strong>
+              <p>Verbinde dein iPhone per USB → AltServer Tray Icon → "Install AltStore" → Wähle dein Gerät → Melde dich mit Apple ID an.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <strong>EcoScan IPA sideloaden</strong>
+              <p>Öffne AltStore auf dem iPhone → "My Apps" → "+" → Wähle die heruntergeladene <code>eco_scan.ipa</code></p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <strong>Automatische Erneuerung</strong>
+              <p>Solange AltServer auf deinem PC läuft und dein iPhone im selben WLAN ist, wird die App alle 7 Tage automatisch erneuert.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="info-box tip">
+        <span class="icon">💡</span>
+        <p><strong>EU-User:</strong> Wenn du in der EU bist (iOS 17.4+), kannst du AltStore PAL direkt aus dem App Store installieren — kein PC nötig!</p>
+      </div>
     </div>
 
-    <!-- Alternative -->
-    <div class="alt-download">
-      Oder <a href="https://github.com/Slawnickx/ecoscan-website/releases/latest/download/eco_scan.ipa">IPA-Datei direkt herunterladen</a> (für AltStore / Sideloadly)
+    <!-- General Info -->
+    <div class="divider"></div>
+
+    <div class="info-box success">
+      <span class="icon">✅</span>
+      <p><strong>Alle Methoden funktionieren ohne Jailbreak</strong> und sind mit iOS 15–18 kompatibel. Deine Daten bleiben sicher auf deinem Gerät.</p>
     </div>
 
-    <!-- Steps -->
-    <div class="info-card">
-      <h3>📋 So funktioniert's</h3>
+    <div class="card">
+      <h3>❓ FAQ</h3>
       <ol class="steps">
-        <li>
-          <span class="step-num">1</span>
-          <span>Öffne diese Seite in <strong>Safari</strong> auf deinem iPhone</span>
+        <li class="step">
+          <span class="step-num">?</span>
+          <div class="step-content">
+            <strong>Ist das sicher?</strong>
+            <p>Die IPA ist direkt von uns. ESign/GBox signieren nur lokal — deine Apple ID verlässt dein Gerät nicht.</p>
+          </div>
         </li>
-        <li>
-          <span class="step-num">2</span>
-          <span>Tippe auf <strong>„Auf iPhone installieren"</strong></span>
+        <li class="step">
+          <span class="step-num">?</span>
+          <div class="step-content">
+            <strong>Warum nicht direkt aus dem App Store?</strong>
+            <p>EcoScan nutzt Features die Apple im Store nicht erlaubt. Sideloading ist die einzige Möglichkeit für volle Funktionalität.</p>
+          </div>
         </li>
-        <li>
-          <span class="step-num">3</span>
-          <span>Bestätige den Dialog mit <strong>„Installieren"</strong></span>
-        </li>
-        <li>
-          <span class="step-num">4</span>
-          <span>Gehe zu <strong>Einstellungen → Allgemein → VPN & Geräteverwaltung</strong> und vertraue dem Entwicklerzertifikat</span>
-        </li>
-        <li>
-          <span class="step-num">5</span>
-          <span>Öffne EcoScan von deinem Homescreen 🎉</span>
+        <li class="step">
+          <span class="step-num">?</span>
+          <div class="step-content">
+            <strong>App startet nicht / stürzt ab?</strong>
+            <p>Gehe zu Einstellungen → Allgemein → VPN & Geräteverwaltung und vertraue dem Zertifikat. Falls abgelaufen: einfach neu signieren.</p>
+          </div>
         </li>
       </ol>
     </div>
 
-    <!-- Warning -->
-    <div class="warning-box">
-      <span class="icon">⚠️</span>
-      <p><strong>Wichtig:</strong> Die IPA muss mit einem gültigen Enterprise- oder Ad-Hoc-Zertifikat signiert sein. Ohne gültiges Profil wird iOS die Installation ablehnen. Nutze alternativ AltStore oder Sideloadly für selbst-signierte IPAs.</p>
-    </div>
-
-    <!-- Requirements -->
-    <div class="info-card">
-      <h3>📱 Voraussetzungen</h3>
-      <ul class="req-list">
-        <li>iPhone mit iOS 14.0 oder neuer</li>
-        <li>Safari Browser (andere Browser unterstützen itms-services nicht)</li>
-        <li>Internetverbindung zum Herunterladen</li>
-        <li>Gültiges Signierungszertifikat auf der IPA</li>
-      </ul>
-    </div>
-
     <!-- Footer -->
     <div class="footer">
-      <p>EcoScan © 2024 • <a href="../">Zurück zur Website</a></p>
+      <p>EcoScan © 2024 • <a href="../">Zur Hauptseite</a></p>
     </div>
   </div>
 
   <script>
-    // Detect if not iOS
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
-                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    
-    const installBtn = document.getElementById('installBtn');
-    const notIos = document.getElementById('notIos');
-    const installStarted = document.getElementById('installStarted');
-
-    if (!isIOS) {
-      notIos.style.display = 'block';
-    }
-
-    // Show feedback after clicking install
-    installBtn.addEventListener('click', function(e) {
-      if (!isIOS) {
-        e.preventDefault();
-        notIos.style.display = 'block';
-        notIos.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        return;
-      }
-      
-      setTimeout(() => {
-        installStarted.style.display = 'block';
-        installStarted.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 1000);
+    // Tab switching
+    document.querySelectorAll('.method-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.method-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.method-content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('method-' + tab.dataset.method).classList.add('active');
+      });
     });
+
+    // Copy function
+    function copyText(id) {
+      const input = document.getElementById(id);
+      input.select();
+      navigator.clipboard.writeText(input.value).then(() => {
+        const btn = input.nextElementSibling;
+        btn.textContent = '✓ Kopiert';
+        btn.style.background = 'rgba(76,175,80,0.4)';
+        setTimeout(() => {
+          btn.textContent = 'Kopieren';
+          btn.style.background = '';
+        }, 2000);
+      });
+    }
   </script>
 </body>
 </html>
